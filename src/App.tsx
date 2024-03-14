@@ -1,29 +1,87 @@
-function App() {
+import img1 from "/images/avatar-ali.png";
+import img2 from "/images/avatar-anisha.png";
+import img3 from "/images/avatar-richard.png";
+import img4 from "/images/avatar-shanai.png";
+
+const IMAGES = [
+  { url: img1, alt: "Avatar One" },
+  { url: img2, alt: "Avatar Two" },
+  { url: img3, alt: "Avatar Three" },
+  { url: img4, alt: "Avatar Four" },
+];
+
+import { useState } from "react";
+
+const App: React.FC = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   return (
     <>
-      <div className="Home font flex flex-col items-center gap-14 bg-white text-lg text-blue-950">
-        <header className="my-8 flex hidden w-full items-center">
-          <img
-            className="m-auto hover:cursor-pointer"
-            src="./images/logo.svg"
-            alt=""
-          />
-          <nav>
-            <ul className="flex gap-5">
-              <li className="hover:cursor-pointer">Home</li>
-              <li className="hover:cursor-pointer">Pricing</li>
-              <li className="hover:cursor-pointer">Products</li>
-              <li className="hover:cursor-pointer">About Us</li>
-              <li className="hover:cursor-pointer">Careers</li>
-              <li className="hover:cursor-pointer">Community</li>
-            </ul>
-          </nav>
-          <button className="m-auto rounded-full bg-orange-600 px-8 py-3 text-sm text-white drop-shadow-lg hover:opacity-50">
-            Get Started
-          </button>
-        </header>
+      <div className="Home font flex flex-col items-center justify-center gap-14 self-center bg-white text-lg text-blue-950">
+        <nav className="container relative mx-auto p-6">
+          <div className="flex items-center justify-between">
+            <div className="pt-2">
+              <img src="images/logo.svg" alt="" />
+            </div>
+            <div className="hidden space-x-6 md:flex">
+              <a href="#" className="hover:text-darkGrayishBlue">
+                Pricing
+              </a>
+              <a href="#" className="hover:text-darkGrayishBlue">
+                Product
+              </a>
+              <a href="#" className="hover:text-darkGrayishBlue">
+                About Us
+              </a>
+              <a href="#" className="hover:text-darkGrayishBlue">
+                Careers
+              </a>
+              <a href="#" className="hover:text-darkGrayishBlue">
+                Community
+              </a>
+            </div>
+            <a
+              href="#"
+              className="bg-brightRed baseline hover:bg-brightRedLight hidden rounded-full p-3 px-6 pt-2 text-white md:block"
+            >
+              Get Started
+            </a>
+
+            <button
+              id="menu-btn"
+              className={`hamburger block focus:outline-none md:hidden ${
+                isNavOpen ? "open" : ""
+              }`}
+              onClick={toggleNav}
+            >
+              <span className="hamburger-top"></span>
+              <span className="hamburger-middle"></span>
+              <span className="hamburger-bottom"></span>
+            </button>
+          </div>
+
+          <div className={`md:hidden${isNavOpen ? "flex" : ""}`}>
+            <div
+              id="menu"
+              className={`absolute left-6 right-6 mt-10 flex-col items-center space-y-6 self-end bg-white py-8 font-bold drop-shadow-md sm:w-auto sm:self-center md:hidden ${
+                isNavOpen ? "flex" : "hidden"
+              }`}
+            >
+              <a href="#">Pricing</a>
+              <a href="#">Product</a>
+              <a href="#">About Us</a>
+              <a href="#">Careers</a>
+              <a href="#">Community</a>
+            </div>
+          </div>
+        </nav>
+
         <div className="flex flex-col-reverse place-content-center lg:flex-row">
-          <div className="flex max-w-[600px] flex-col gap-y-5 p-10 text-left">
+          <div className="flex max-w-[600px] flex-col gap-y-5 p-6 text-left">
             <h1 className="text-5xl font-bold">
               Bring everyone together to build better products.
             </h1>
@@ -36,13 +94,13 @@ function App() {
             </button>
           </div>
           <img
-            className="object-scale-down"
+            className="max-w-[300px]"
             src="./images/illustration-intro.svg"
             alt=""
           />
         </div>
-        <div className="flex flex-col place-content-center gap-10 lg:flex-row">
-          <div className="flex max-w-[540px] flex-col gap-5 p-10">
+        <div className="flex max-w-[900px] flex-col place-content-center gap-10 lg:flex-row">
+          <div className="flex max-w-[540px] flex-col gap-5 p-6">
             <h1 className=" text-4xl font-bold">
               What’s different about Manage?
             </h1>
@@ -101,11 +159,11 @@ function App() {
         <h1 className="my-28 text-center text-3xl font-bold md:text-5xl">
           What they’ve said
         </h1>
-        <div className="mb-14 flex hidden">
-          <div className="relative flex flex-col items-center gap-5 bg-gray-100 px-6 pb-10">
+        <div className="flex flex-col flex-wrap justify-center gap-24 md:flex-row">
+          <div className="relative flex max-w-[400px] flex-col items-center gap-5 bg-gray-100 px-6 pb-10">
             <img
               className="absolute -top-20 pb-10"
-              src="./images/avatar-anisha.png"
+              src="./images/avatar-ali.png"
               alt=""
             />
             <p className="pt-[22%] font-bold">Anisha Li</p>
@@ -115,10 +173,10 @@ function App() {
               everyone motivated.”
             </p>
           </div>
-          <div className="relative flex flex-col items-center gap-5 bg-gray-100 px-6 pb-10">
+          <div className="relative flex max-w-[400px] flex-col items-center gap-5 bg-gray-100 px-6 pb-10">
             <img
               className="absolute -top-20 pb-10"
-              src="./images/avatar-ali.png"
+              src="./images/avatar-anisha.png"
               alt=""
             />
             <p className="pt-[22%] font-bold">Ali Bravo</p>
@@ -128,7 +186,7 @@ function App() {
               everyone is much more focused.”
             </p>
           </div>
-          <div className="relative flex flex-col items-center gap-5 bg-gray-100 px-6 pb-10">
+          <div className="relative flex max-w-[400px] flex-col items-center gap-5 bg-gray-100 px-6 pb-10">
             <img
               className="absolute -top-20 pb-10"
               src="./images/avatar-richard.png"
@@ -141,7 +199,7 @@ function App() {
               I talk to!”
             </p>
           </div>
-          <div className="relative flex flex-col items-center gap-5 bg-gray-100 px-6 pb-10">
+          {/* <div className="relative flex flex-col items-center gap-5 bg-gray-100 px-6 pb-10">
             <img
               className="absolute -top-20 pb-10"
               src="./images/avatar-shanai.png"
@@ -153,12 +211,15 @@ function App() {
               projects from anywhere. It keeps the whole team in-sync without
               being intrusive.”
             </p>
-          </div>
+          </div> */}
         </div>
         <button className="rounded-full bg-orange-600 px-8 py-3 text-sm text-white drop-shadow-lg hover:opacity-50">
           Get Started
         </button>
-        <div className="flex w-full flex-col bg-orange-600 px-4 py-14 text-center md:flex-row">
+        <div
+          id="cta"
+          className="flex w-full flex-col bg-orange-600 px-4 py-14 text-center md:flex-row"
+        >
           <p className="m-auto pb-5 text-center text-3xl font-bold text-white">
             Simplify how your team works today.
           </p>
@@ -166,83 +227,83 @@ function App() {
             Get Started
           </button>
         </div>
-        <footer className="flex hidden w-full items-center bg-gray-800 p-14 text-gray-400">
-          <div className="m-auto my-0">
-            <img
-              className="mb-10 fill-white text-white"
-              src="./images/logo-white.svg"
-              alt=""
-            />
-            <div className="flex">
-              <img
-                className="hover:cursor-pointer"
-                src="./images/icon-facebook.svg"
-                alt=""
-              />
-              <img
-                className="hover:cursor-pointer"
-                src="./images/icon-youtube.svg"
-                alt=""
-              />
-              <img
-                className="hover:cursor-pointer"
-                src="./images/icon-twitter.svg"
-                alt=""
-              />
-              <img
-                className="hover:cursor-pointer"
-                src="./images/icon-pinterest.svg"
-                alt=""
-              />
-              <img
-                className="hover:cursor-pointer"
-                src="./images/icon-instagram.svg"
-                alt=""
-              />
+        <footer className="w-full bg-slate-950">
+          <div className="container mx-auto flex flex-col-reverse justify-between space-y-8 px-6 py-10 md:flex-row md:space-y-0">
+            <div className="flex flex-col-reverse items-center justify-between space-y-12 md:flex-col md:items-start md:space-y-0">
+              <div className="mx-auto my-6 text-center text-white md:hidden">
+                Copyright &copy; 2022, All Rights Reserved
+              </div>
+              <div>
+                <img src="images/logo-white.svg" className="h-8" alt="" />
+              </div>
+              <div className="flex justify-center space-x-4">
+                <a href="#">
+                  <img src="images/icon-facebook.svg" alt="" className="h-8" />
+                </a>
+                <a href="#">
+                  <img src="images/icon-youtube.svg" alt="" className="h-8" />
+                </a>
+                <a href="#">
+                  <img src="images/icon-twitter.svg" alt="" className="h-8" />
+                </a>
+                <a href="#">
+                  <img src="images/icon-pinterest.svg" alt="" className="h-8" />
+                </a>
+                <a href="#">
+                  <img src="images/icon-instagram.svg" alt="" className="h-8" />
+                </a>
+              </div>
             </div>
-          </div>
-          <ul className="grid grid-flow-col grid-rows-4 gap-10">
-            <li className="hover:cursor-pointer hover:text-orange-600">
-              <h1>Home</h1>
-            </li>
-            <li className="hover:cursor-pointer hover:text-orange-600">
-              <h1>Pricing</h1>
-            </li>
-            <li className="hover:cursor-pointer hover:text-orange-600">
-              <h1>Products</h1>
-            </li>
-            <li className="hover:cursor-pointer hover:text-orange-600">
-              <h1>About Us</h1>
-            </li>
-            <li className="hover:cursor-pointer hover:text-orange-600">
-              <h1>Careers</h1>
-            </li>
-            <li className="hover:cursor-pointer hover:text-orange-600">
-              <h1>Community</h1>
-            </li>
-            <li className="hover:cursor-pointer hover:text-orange-600">
-              <h1>Privacy Policy</h1>
-            </li>
-          </ul>
-          <div className="m-auto my-0">
-            <div className="m-auto flex">
-              <input
-                type="text"
-                name="email"
-                id="email"
-                placeholder="Updates in your inbox…"
-                className="rounded-full text-center"
-              />
-              <button className="rounded-full bg-orange-600 px-5 py-1 font-bold text-white">
-                Go
-              </button>
+            <div className="flex justify-around space-x-24">
+              <div className="flex flex-col space-y-3 text-white">
+                <a href="#" className="hover:text-brightRed">
+                  Home
+                </a>
+                <a href="#" className="hover:text-brightRed">
+                  Pricing
+                </a>
+                <a href="#" className="hover:text-brightRed">
+                  Products
+                </a>
+                <a href="#" className="hover:text-brightRed">
+                  About
+                </a>
+              </div>
+              <div className="flex flex-col space-y-3 text-white">
+                <a href="#" className="hover:text-brightRed">
+                  Careers
+                </a>
+                <a href="#" className="hover:text-brightRed">
+                  Community
+                </a>
+                <a href="#" className="hover:text-brightRed">
+                  Privacy Policy
+                </a>
+              </div>
             </div>
-            <p className="">Copyright 2020. All Rights Reserved</p>
+
+            <div className="flex flex-col justify-between">
+              <form>
+                <div className="flex flex-wrap space-x-3">
+                  <input
+                    type="text"
+                    className="flex-1 rounded-full px-4 focus:outline-none"
+                    placeholder="Updated in your inbox"
+                  />
+                  <button className="bg-brightRed hover:bg-brightRedLight rounded-full px-6 py-2 text-white focus:outline-none">
+                    Go
+                  </button>
+                </div>
+              </form>
+              <div className="hidden text-white md:block">
+                Copyright &copy; 2022, All Rights Reserved
+              </div>
+            </div>
           </div>
         </footer>
       </div>
     </>
   );
-}
+};
 
 export default App;
